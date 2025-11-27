@@ -3,9 +3,9 @@ import csv
 with open('target_directory.txt', 'r') as f:
     directory = f.read()
 
-with open('tickers.txt', 'r') as f:
-    tickers = f.read().splitlines()
-
+with open('tickers.csv', mode='r', newline='',) as f:
+    csv_reader = csv.reader(f)
+    tickers = list(csv_reader)
 
 def get_report(ticker):
     with open(f'{directory}/{ticker}.csv', mode='r', newline='', encoding='utf-8') as file:
@@ -45,8 +45,8 @@ def get_report(ticker):
 
 # print(get_report(tickers[0]))
 report_list = []
-for ticker in tickers:
-    report_list.append(get_report(ticker))
+for t in tickers:
+    report_list.append(get_report(t[0]))
 print(report_list)
 with open(f'{directory}/report.csv', mode='w', newline='') as f:
     writer = csv.writer(f)
