@@ -6,9 +6,11 @@ import yfinance as yf
 with open('target_directory.txt', 'r') as f:
     directory = f.read()
 
-# create working directory
 if not os.path.exists(directory):
     os.makedirs(directory)
+
+with open('tickers.txt', 'r') as f:
+    tickers = f.read().splitlines()
 
 date_obj = datetime.strptime(directory, '%Y-%m-%d')
 print(date_obj + timedelta(days=1))
@@ -24,5 +26,6 @@ def get_ticker_history(stock_symbol):
     return data
 
 
-df = get_ticker_history('DIA')
-print(df.tail())
+for t in tickers:
+    df = get_ticker_history(t)
+    # print(df.tail())
