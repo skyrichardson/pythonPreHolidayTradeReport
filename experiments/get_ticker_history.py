@@ -1,8 +1,8 @@
 import yfinance as yf
 import time
 
-start_date_str = '2025-11-25'
-end_date_str = '2025-11-27'
+start_date_str = '2025-11-20'
+end_date_str = '2025-11-26'
 
 
 # For close price for target date and one day prior
@@ -13,6 +13,6 @@ def get_ticker_history(stock_symbol):
     return data
 
 
-df = get_ticker_history('SPY')
+df = get_ticker_history('YM=F')
 print(df)
 print('profit/loss', df['Close'].iloc[1] - df['Close'].iloc[0])
