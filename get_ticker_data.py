@@ -1,3 +1,4 @@
+import csv
 import os
 from datetime import datetime, timedelta
 import time
@@ -9,11 +10,12 @@ with open('target_directory.txt', 'r') as f:
 if not os.path.exists(directory):
     os.makedirs(directory)
 
-with open('tickers.txt', 'r') as f:
-    tickers = f.read().splitlines()
+with open('tickers.csv', mode='r', newline='',) as f:
+    csv_reader = csv.reader(f)
+    tickers = list(csv_reader)
 
 date_obj = datetime.strptime(directory, '%Y-%m-%d')
-print(date_obj + timedelta(days=1))
+# print(date_obj + timedelta(days=1))
 start_date_str = (date_obj - timedelta(days=15)).strftime('%Y-%m-%d')
 end_date_str = (date_obj + timedelta(days=1)).strftime('%Y-%m-%d')
 
@@ -27,5 +29,5 @@ def get_ticker_history(stock_symbol):
 
 
 for t in tickers:
-    df = get_ticker_history(t)
+    df = get_ticker_history(t[0])
     # print(df.tail())
