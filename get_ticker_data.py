@@ -7,7 +7,8 @@ with open('target_directory.txt', 'r') as f:
     directory = f.read()
 
 # create working directory
-# os.mkdir(directory)
+if not os.path.exists(directory):
+    os.makedirs(directory)
 
 date_obj = datetime.strptime(directory, '%Y-%m-%d')
 print(date_obj + timedelta(days=1))
@@ -23,5 +24,5 @@ def get_ticker_history(stock_symbol):
     return data
 
 
-df = get_ticker_history('SPY')
+df = get_ticker_history('DIA')
 print(df.tail())
